@@ -28,9 +28,10 @@ const clients = new Set();
 // Endpoint za primanje podataka od Kafka consumera
 app.post('/api/receive-data', (req, res) => {
     const receivedData = req.body;
-
+    
     // Slanje podataka svim klijentima putem WebSocket-a
     const jsonData = JSON.stringify(receivedData);
+    console.log("Received data "+jsonData);
     clients.forEach(client => {
         client.send(jsonData);
     });
